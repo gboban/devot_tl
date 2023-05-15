@@ -32,3 +32,5 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->na
 Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
 Route::post('/admin/users/delete', [App\Http\Controllers\AdminController::class, 'delete_user'])->name('users');
 Route::post('/admin/users/new', [App\Http\Controllers\AdminController::class, 'create_user'])->name('users');
+
+Route::get('/admin/timesheets', [App\Http\Controllers\AdminController::class, 'timesheets'])->name('timesheets');

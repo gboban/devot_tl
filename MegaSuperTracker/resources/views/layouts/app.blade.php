@@ -40,6 +40,10 @@
                         {{ __('Users') }}
                     </a>
 
+                    | <a id="navbarDropdown" class="nav-link dropdown-toggle" href="{{ url('admin/timesheets') }}" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ __('Timesheets') }}
+                    </a>
+
                     | <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">

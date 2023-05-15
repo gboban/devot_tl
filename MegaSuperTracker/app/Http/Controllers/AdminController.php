@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Timesheet;
 
 class AdminController extends Controller
 {
@@ -27,7 +28,6 @@ class AdminController extends Controller
     {
         return view('admin');
     }
-
 
     /**
      * Display users and user add form.
@@ -68,64 +68,24 @@ class AdminController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display timesheets.
      *
+     * @param  \Illuminate\Http\Request  $request - start/end date
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function timesheets(Request $request)
     {
-        //
-    }
+        $timesheets = Timesheet::all();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        // filter data
+        $request_data = $request->all();
+        if(!empty($request_data['start'])){
+            $timesheets = $timesheets->where('start', '>=', $request_data['start']);
+        }
+        if(!empty($request_data['end'])){
+            $timesheets = $timesheets->where('end', '<=', $request_data['end']);
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy()
-    {
-        //
+        return view('admin_timesheets', compact('timesheets'));
     }
 }
